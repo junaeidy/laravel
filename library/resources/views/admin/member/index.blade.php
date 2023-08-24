@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('header' , 'Home')
+@section('header' , 'Member')
 
 @section('content')
 <div class="container">
-    ini adalah halaman home
+    ini adalah halaman member
 </div>
 @endsection
