@@ -46,10 +46,10 @@ class HomeController extends Controller
         //$data = Transaction::select('members.id', 'members.name')->rightJoin('members', 'members.id', '=', 'transactions.member_id')->where('transactions.member_id', null)->get();
 
         //no 4
-        $data = Member::select('members.id', 'members.name', 'members.phone_number')->join('transactions', 'transactions.member_id', '=', 'members.id')->orderBy('members.id', 'asc')->get();
+            //$data = Member::select('members.id', 'members.name', 'members.phone_number')->join('transactions', 'transactions.member_id', '=', 'members.id')->orderBy('members.id', 'asc')->get();
 
 
-        return $data;
+        //return $data;
         return view('home');
     }
 }
