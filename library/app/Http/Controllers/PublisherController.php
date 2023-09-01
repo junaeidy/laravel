@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $publishers = Publisher::all();
 
-        return view('admin.publisher.index', compact('publishers'));
+        return view('admin.publisher', compact('publishers'));
     }
 
     /**
@@ -22,7 +23,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('admin.publisher.create');
+        //
     }
 
     /**
@@ -30,11 +31,18 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+
+        /**$this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'phone_number' => 'required|string|regex:/^08[0-9]{9}$/',
             'address' => 'required|string',
+        ]);*/
+        $this->validate($request,[
+            'name'  =>  ['required'],
+            'email'  =>  ['required'],
+            'phone_number'  =>  ['required'],
+            'address'  =>  ['required'],
         ]);
 
         Publisher::create($request->all());
@@ -56,7 +64,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        return view('admin.publisher.edit', compact('publisher'));
+        return view('admin.publisher');
     }
 
     /**
@@ -77,7 +85,7 @@ class PublisherController extends Controller
         $publisher->address = $request->input('address');
         $publisher->save();
 
-        return redirect('publisher');
+        return redirect('publishers');
 
     }
 
@@ -87,7 +95,5 @@ class PublisherController extends Controller
     public function destroy(Publisher $publisher)
     {
         $publisher->delete();
-
-        return redirect('publishers');
     }
 }
