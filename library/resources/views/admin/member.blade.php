@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('header', 'Author')
+@section('header', 'Member')
 
 @section('css')
 <!-- Datatables -->
@@ -13,7 +13,7 @@
         <div class="container">
             <div class="card">
                 <div class="card-header">
-                    <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Author</a>
+                    <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Member</a>
                 </div>
 
                 <div class="card-body p-0">
@@ -22,9 +22,10 @@
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th class="text-center">Name</th>
-                                <th class="text-center">Email</th>
+                                <th class="text-center">Gender</th>
                                 <th class="text-center">Phone Number</th>
                                 <th class="text-center">Address</th>
+                                <th class="text-center">Email</th>
                                 <th class="text-center" style="width: 150px">Action</th>
                             </tr>
                         </thead>
@@ -37,7 +38,7 @@
                 <div class="modal-content">
                     <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
                         <div class="modal-header">
-                            <h4 class="modal-title">Author</h4>
+                            <h4 class="modal-title">Member</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -50,8 +51,8 @@
                                 <input type="text" class="form-control" name="name" :value="data.name" required>
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" name="email" :value="data.email" required>
+                                <label>Gender</label>
+                                <input type="text" class="form-control" name="gender" :value="data.gender" required>
                             </div>
                             <div class="form-group">
                                 <label>Phone Number</label>
@@ -60,6 +61,10 @@
                             <div class="form-group">
                                 <label>Address</label>
                                 <input type="text" class="form-control" name="address" :value="data.address" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="email" :value="data.email" required>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -89,15 +94,16 @@
 <script src="{{asset ('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
 <script type="text/javascript">
-    var actionUrl = '{{ url('/authors') }}';
-    var apiUrl = '{{ url('/api/authors') }}';
+    var actionUrl = '{{ url('/members') }}';
+    var apiUrl = '{{ url('/api/members') }}';
 
     var columns = [
         {data: 'DT_RowIndex', class: 'text-center', orderable: false},
         {data: 'name', class: 'text-center', orderable: false},
-        {data: 'email', class: 'text-center', orderable: false},
+        {data: 'gender', class: 'text-center', orderable: false},
         {data: 'phone_number', class: 'text-center', orderable: false},
         {data: 'address', class: 'text-center', orderable: false},
+        {data: 'email', class: 'text-center', orderable: false},
         {render: function (index, row, data, meta){
             return `
                 <a href='#' class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">Edit</a> |
@@ -131,7 +137,7 @@
             el : '#controller',
             data : {
                 data : {},
-                actionUrl : '{{ url('authors') }}',
+                actionUrl : '{{ url('members') }}',
                 editStatus : false
 
             },
@@ -141,18 +147,18 @@
             methods: {
                 addData(){
                     this.data = {};
-                    this.actionUrl = '{{ url('authors') }}';
+                    this.actionUrl = '{{ url('members') }}';
                     this.editStatus = false;
                     $('#modal-default').modal();
                 },
                 editData(data){
                     this.data = data;
-                    this.actionUrl = '{{ url('authors') }}'+'/' +data.id;
+                    this.actionUrl = '{{ url('members') }}'+'/' +data.id;
                     this.editStatus = true;
                     $('#modal-default').modal();
                 },
                 deleteData(id){
-                    this.actionUrl = '{{ url('authors') }}'+'/'+id;
+                    this.actionUrl = '{{ url('members') }}'+'/'+id;
                     if(confirm("Are you sure?")){
                         axios.post(this.actionUrl, {_method: 'DELETE'}).then(response =>{
                             location.reload();

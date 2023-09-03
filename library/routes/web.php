@@ -21,8 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/books', [App\Http\Controllers\BookController::class, 'index']);
-Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index']);
-Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
 Route::get('/transactions', [App\Http\Controllers\TransactionController::class, 'index']);
 Route::get('/transaction_details', [App\Http\Controllers\TransactionDetailController::class, 'index']);
 
@@ -34,9 +32,18 @@ Route::get('/transaction_details', [App\Http\Controllers\TransactionDetailContro
 //Route::put('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'update']);
 //Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
 
+//Route
 
 route::resource('/catalogs', App\Http\Controllers\CatalogController::class);
 route::resource('/publishers', App\Http\Controllers\PublisherController::class);
 route::resource('/authors', App\Http\Controllers\AuthorController::class);
+route::resource('/members', App\Http\Controllers\MemberController::class);
+
+//API
+
+Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
+Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
+Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);
+
 
 

@@ -13,10 +13,10 @@ class PublisherController extends Controller
     }
     public function index()
     {
-        $publishers = Publisher::all();
 
-        return view('admin.publisher', compact('publishers'));
+        return view('admin.publisher');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -26,6 +26,13 @@ class PublisherController extends Controller
         //
     }
 
+    public function api()
+    {
+        $publishers = Publisher::all();
+        $datatables = datatables()->of($publishers)->addIndexColumn();
+
+        return $datatables->make(true);
+    }
     /**
      * Store a newly created resource in storage.
      */
