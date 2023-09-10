@@ -29,7 +29,10 @@ class PublisherController extends Controller
     public function api()
     {
         $publishers = Publisher::all();
-        $datatables = datatables()->of($publishers)->addIndexColumn();
+        $datatables = datatables()->of($publishers)
+                    ->addColumn('date', function($publisher){
+                        return dateFormat($publisher->created_at);
+                    })->addIndexColumn();
 
         return $datatables->make(true);
     }
