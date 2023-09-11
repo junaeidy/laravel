@@ -38,6 +38,7 @@ route::resource('/publishers', App\Http\Controllers\PublisherController::class);
 route::resource('/authors', App\Http\Controllers\AuthorController::class);
 route::resource('/members', App\Http\Controllers\MemberController::class);
 route::resource('/books', App\Http\Controllers\BookController::class);
+route::resource('/home', App\Http\Controllers\HomeController::class);
 
 //API
 

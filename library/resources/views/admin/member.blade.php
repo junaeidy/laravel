@@ -53,7 +53,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Gender</label>
-                                <input type="text" class="form-control" name="gender" :value="data.gender" required>
+                                <select name="gender" class="form-control">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                                <!--<input type="text" class="form-control" name="gender" :value="data.gender" required> -->
                             </div>
                             <div class="form-group">
                                 <label>Phone Number</label>
